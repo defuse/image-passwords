@@ -43,7 +43,7 @@ function canvasSupport() {
 
 function canvasApp() {
 
-    var MAX_KEY_LENGTH = 9;
+    var MAX_KEY_LENGTH = 10;
     var theCanvas = document.getElementById("canvasOne");
     var context = theCanvas.getContext("2d");
 
@@ -66,6 +66,7 @@ function canvasApp() {
                 }
             }
         ?> ];
+    imagePaths.sort();
 
     var images = [];
     for (var i = 0; i < imagePaths.length; i++) {
