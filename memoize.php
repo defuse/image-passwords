@@ -19,6 +19,7 @@
 #canvasOne {
     margin-top: 20px;
     margin-bottom: 20px;
+    border: solid black 5px;
     position: relative;
 }
 #txtPassword {
@@ -42,7 +43,15 @@ function canvasSupport() {
 
 function canvasApp() {
 
-    var MAX_KEY_LENGTH = 6;
+    var MAX_KEY_LENGTH = 9;
+    var theCanvas = document.getElementById("canvasOne");
+    var context = theCanvas.getContext("2d");
+
+    context.fillStyle = "#000000";
+    context.fillRect(0, 0, theCanvas.width, theCanvas.height);
+    context.fillStyle = "#FFFFFF";
+    context.font = "bold 20px monospace";
+    context.fillText("Loading...", 20, 30);
 
     if (!canvasSupport()) {
         alert('Your browser does not support HTML5 Canvas. Please try one that does.');
@@ -61,7 +70,16 @@ function canvasApp() {
     var images = [];
     for (var i = 0; i < imagePaths.length; i++) {
         images[i] = new Image();
+        images[i].addEventListener("load", imageLoaded, false);
         images[i].src = imagePaths[i];
+    }
+
+    var loaded_count = 0;
+    function imageLoaded(e) {
+        loaded_count += 1;
+        if (loaded_count == imagePaths.length) {
+            btnRandomPassword_click();
+        }
     }
 
     var index = 0;
@@ -81,9 +99,6 @@ function canvasApp() {
     var highlight_y = -1;
     var key_train = [];
     var key_input = [];
-
-    var theCanvas = document.getElementById("canvasOne");
-    var context = theCanvas.getContext("2d");
 
     theCanvas.addEventListener("mouseup", canvas_mouseup, false);
     function canvas_mouseup(e) {
@@ -145,8 +160,6 @@ function canvasApp() {
         key_input = [];
         drawScreen();
     }
-
-    btnRandomPassword_click();
 
     function drawScreen() {
 
