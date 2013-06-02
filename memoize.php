@@ -296,7 +296,7 @@ function canvasApp() {
 
     <div id="everything">
         <p style="font-size: 16pt;">
-            <strong>Image-Based Password Trainer</strong>
+            <strong>Image Sequence Keys</strong>
         </p>
 
         <p>
@@ -353,6 +353,7 @@ function canvasApp() {
 
         <p>
         Written by <a href="https://defuse.ca/">Taylor Hornby</a>.
+        Source code on <a href="https://github.com/defuse/image-passwords">GitHub</a>.
         </p>
 
         <p>
