@@ -93,6 +93,7 @@ function canvasApp() {
         context.fillStyle = "#00FF00";
         context.fillRect(50, 50, 300 * loaded_count / imagePaths.length, 20);
         context.strokeStyle = "#FFFFFF";
+        context.lineWidth = 2;
         context.strokeRect(50, 50, 300, 20);
 
         context.fillStyle = "#FFFFFF";
