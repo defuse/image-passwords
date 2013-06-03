@@ -21,6 +21,9 @@
     margin-bottom: 20px;
     border: solid black 5px;
     position: relative;
+    /* must match the canvas size */
+    width: 400px;
+    height: 400px;
 }
 #txtPassword {
     border: solid black 1px;
@@ -47,12 +50,6 @@ function canvasApp() {
     var theCanvas = document.getElementById("canvasOne");
     var context = theCanvas.getContext("2d");
 
-    context.fillStyle = "#000000";
-    context.fillRect(0, 0, theCanvas.width, theCanvas.height);
-    context.fillStyle = "#FFFFFF";
-    context.font = "bold 20px monospace";
-    context.fillText("Loading...", 20, 30);
-
     if (!canvasSupport()) {
         alert('Your browser does not support HTML5 Canvas. Please try one that does.');
         return;
@@ -68,6 +65,7 @@ function canvasApp() {
         ?> ];
     imagePaths.sort();
 
+    var loaded_count = 0;
     var images = [];
     for (var i = 0; i < imagePaths.length; i++) {
         images[i] = new Image();
@@ -75,13 +73,33 @@ function canvasApp() {
         images[i].src = imagePaths[i];
     }
 
-    var loaded_count = 0;
+    drawLoading();
+
     function imageLoaded(e) {
         loaded_count += 1;
+        drawLoading();
         if (loaded_count == imagePaths.length) {
             btnRandomPassword_click();
         }
     }
+
+    function drawLoading() {
+        context.fillStyle = "#000000";
+        context.fillRect(0, 0, theCanvas.width, theCanvas.height);
+        context.fillStyle = "#FFFFFF";
+        context.font = "bold 20px monospace";
+        context.fillText("Loading images...", 20, 30);
+
+        context.fillStyle = "#00FF00";
+        context.fillRect(50, 50, 300 * loaded_count / imagePaths.length, 20);
+        context.strokeStyle = "#FFFFFF";
+        context.strokeRect(50, 50, 300, 20);
+
+        context.fillStyle = "#FFFFFF";
+        context.font = "normal 12px monospace";
+        context.fillText(loaded_count + "/" + imagePaths.length, 180, 90);
+    }
+
 
     var index = 0;
     var image_groups = [];
@@ -211,8 +229,8 @@ function canvasApp() {
 
         if (highlight_x > -1 && highlight_y > -1) {
             context.strokeStyle = "#00FF00";
-            context.lineWidth = 5;
-            context.strokeRect(highlight_x * 100, highlight_y * 100, 100, 100);
+            context.lineWidth = 4;
+            context.strokeRect(highlight_x * 100 + 2, highlight_y * 100 + 2, 100 - 4, 100 - 4);
         }
 
         // if (mouse_x > -1 && mouse_y > -1) {
