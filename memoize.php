@@ -46,7 +46,7 @@ function canvasSupport() {
 
 function canvasApp() {
 
-    var MAX_KEY_LENGTH = 13;
+    var MAX_KEY_LENGTH = 17;
     var theCanvas = document.getElementById("canvasOne");
     var context = theCanvas.getContext("2d");
 
