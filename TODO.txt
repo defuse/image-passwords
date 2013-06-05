@@ -3,3 +3,4 @@
 3. Combine all the images into one big image for efficiency.
 4. Do other things like randomize the image order (so getting it wrong is more
 obvious), and randomize which set of images comes next.
+5. It doesn't work in whatever version of IE comes with win8.
