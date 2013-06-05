@@ -19,7 +19,8 @@
     }
     #txtPassword {
         border: solid black 1px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
+        padding: 3px;
         width: 490px;
     }
     </style>
