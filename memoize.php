@@ -34,6 +34,8 @@
 
 <script type="text/javascript">
 
+// TODO: parameterize everything so we can make it bigger (try 150 px).
+
 window.addEventListener("load", eventWindowLoaded, false);
 
 function eventWindowLoaded(e) {
@@ -46,7 +48,7 @@ function canvasSupport() {
 
 function canvasApp() {
 
-    var MAX_KEY_LENGTH = 17;
+    var MAX_KEY_LENGTH = 20;
     var theCanvas = document.getElementById("canvasOne");
     var context = theCanvas.getContext("2d");
 
