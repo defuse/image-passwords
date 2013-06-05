@@ -22,8 +22,8 @@
     border: solid black 5px;
     position: relative;
     /* must match the canvas size */
-    width: 400px;
-    height: 400px;
+    width: 600px;
+    height: 600px;
 }
 #txtPassword {
     border: solid black 1px;
@@ -48,7 +48,13 @@ function canvasSupport() {
 
 function canvasApp() {
 
+    // Constants
     var MAX_KEY_LENGTH = 20;
+    var CELL_WIDTH = 150;
+    var CELL_HEIGHT = 150;
+    var NUM_COLUMNS = 4;
+    var NUM_ROWS = 4;
+
     var theCanvas = document.getElementById("canvasOne");
     var context = theCanvas.getContext("2d");
 
@@ -108,7 +114,7 @@ function canvasApp() {
     var image_groups = [];
     for (var i = 0; i < MAX_KEY_LENGTH; i++) {
         image_groups[i] = [];
-        for (var j = 0; j < 16; j++) {
+        for (var j = 0; j < NUM_ROWS * NUM_COLUMNS; j++) {
             image_groups[i].push(images[index++]);
         }
     }
@@ -135,8 +141,8 @@ function canvasApp() {
                 (canvas_x >= 0 && canvas_x < theCanvas.width) &&
                 (canvas_y >= 0 && canvas_y < theCanvas.height)
             ) {
-                mouse_x = Math.floor(canvas_x / 100);
-                mouse_y = Math.floor(canvas_y / 100);
+                mouse_x = Math.floor(canvas_x / CELL_WIDTH);
+                mouse_y = Math.floor(canvas_y / CELL_HEIGHT);
                 key_input.push(mouse_y * 4 + mouse_x);
             } else { 
                 mouse_x = -1;
@@ -225,22 +231,16 @@ function canvasApp() {
         var image_group = image_groups[key_input.length];
 
         for (var i = 0; i < 16; i++) {
-            var img_x = (i % 4) * 100;
-            var img_y = Math.floor(i / 4) * 100;
-            context.drawImage(image_group[i], img_x, img_y, 100, 100);
+            var img_x = (i % 4) * CELL_WIDTH;
+            var img_y = Math.floor(i / 4) * CELL_HEIGHT;
+            context.drawImage(image_group[i], img_x, img_y, CELL_WIDTH, CELL_HEIGHT);
         }
 
         if (highlight_x > -1 && highlight_y > -1) {
             context.strokeStyle = "#00FF00";
             context.lineWidth = 4;
-            context.strokeRect(highlight_x * 100 + 2, highlight_y * 100 + 2, 100 - 4, 100 - 4);
+            context.strokeRect(highlight_x * CELL_WIDTH + 2, highlight_y * CELL_HEIGHT + 2, CELL_WIDTH - 4, CELL_HEIGHT - 4);
         }
-
-        // if (mouse_x > -1 && mouse_y > -1) {
-        //     context.strokeStyle = "#0000FF";
-        //     context.lineWidth = 3;
-        //     context.strokeRect(mouse_x * 100, mouse_y * 100, 100, 100);
-        // }
     }
 
     function randomKey() {
@@ -377,7 +377,7 @@ function canvasApp() {
             <input type="button" id="btnLoad" value="Input Key"/>
         </form>
 
-        <canvas id="canvasOne" width="400" height="400">
+        <canvas id="canvasOne" width="600" height="600">
             Your browser does not support HTML5 Canvas.
         </canvas>
 
