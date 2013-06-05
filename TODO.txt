@@ -1,3 +1,5 @@
 1. Make the length an option.
 2. Optionally black out all other images during training.
 3. Combine all the images into one big image for efficiency.
+4. Do other things like randomize the image order (so getting it wrong is more
+obvious), and randomize which set of images comes next.
