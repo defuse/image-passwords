@@ -34,7 +34,7 @@
 
 <script type="text/javascript">
 
-// TODO: parameterize everything so we can make it bigger (try 150 px).
+sjcl.random.startCollectors();
 
 window.addEventListener("load", eventWindowLoaded, false);
 
@@ -132,8 +132,6 @@ function canvasApp() {
     function canvas_mouseup(e) {
         if (mode !== 'stopped') {
             var coords = getMouse(e, theCanvas);
-            // var canvas_x = e.clientX - theCanvas.offsetLeft;
-            // var canvas_y = e.clientY - theCanvas.offsetTop;
             var canvas_x = coords.x;
             var canvas_y = coords.y;
 
@@ -200,7 +198,6 @@ function canvasApp() {
                 context.fillText("You clicked the wrong one. Go back.", 20, 50);
                 return;
             }
-            // TODO: make sure they click the right one
             if (key_input.length == key_train.length) {
                 mode = 'stopped';
             } else {
@@ -226,8 +223,6 @@ function canvasApp() {
             return;
         }
 
-        // TODO: random image order, and random category order
-        // var random = getCSPRNG(key_train.toString());
         var image_group = image_groups[key_input.length];
 
         for (var i = 0; i < 16; i++) {
@@ -246,7 +241,6 @@ function canvasApp() {
     function randomKey() {
         var words = sjcl.random.randomWords(MAX_KEY_LENGTH, 0);
         var key = [];
-        // FIXME: check that this is proper
         for (var i = 0; i < MAX_KEY_LENGTH; i++) {
             key.push(words[i] & 0xF);
         }
